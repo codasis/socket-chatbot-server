@@ -10,10 +10,11 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173", // React URL
+    origin: "*",   // allow all (safe for demo)
     methods: ["GET", "POST"]
   }
 });
+
 
 io.on("connection", (socket) => {
   console.log("User connected:", socket.id);
@@ -38,3 +39,4 @@ io.on("connection", (socket) => {
 server.listen(5000, () => {
   console.log("Server running on port 5000");
 });
+
