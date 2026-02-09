@@ -8,9 +8,13 @@ app.use(cors());
 
 const server = http.createServer(app);
 
-const io = new Server(server, {
+const io = require("socket.io")(server, {
   cors: {
-    origin: "*",   // allow all (safe for demo)
+    origin: [
+      "http://localhost:5173", // Vite dev
+      "http://localhost:3000", // React dev
+      "https://verdant-elf-3e86e5.netlify.app" // Your Netlify URL
+    ],
     methods: ["GET", "POST"]
   }
 });
@@ -39,4 +43,5 @@ io.on("connection", (socket) => {
 server.listen(5000, () => {
   console.log("Server running on port 5000");
 });
+
 
